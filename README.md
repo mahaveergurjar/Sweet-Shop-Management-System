@@ -8,7 +8,6 @@ A full-stack TDD kata project implementing a complete sweet shop management syst
 sweet-shop-management/
 ├── backend/          # Node.js/TypeScript + Express API
 ├── frontend/         # React + TypeScript SPA
-├── setup.sh          # Setup script
 └── README.md
 ```
 
@@ -38,37 +37,100 @@ sweet-shop-management/
 
 ## Quick Setup
 
-1. **Run the setup script:**
+1. **Clone the repository:**
    ```bash
-   ./setup.sh
+   git clone <repository-url>
+   cd Sweet-Shop-Management-System
    ```
 
-2. **Set up the database:**
+2. **Install backend dependencies:**
+   ```bash
+   cd backend
+   npm install
+   ```
+
+3. **Install frontend dependencies:**
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. **Set up the database:**
+   
+   **On Linux/Mac:**
    ```bash
    # Create database
    createdb sweet_shop
 
    # Run migrations
    psql -d sweet_shop -f backend/migrations/001_initial_schema.sql
+   psql -d sweet_shop -f backend/migrations/003_create_purchases_table.sql
    ```
+   
+   **On Windows (using psql):**
+   ```cmd
+   # Create database
+   createdb -U postgres sweet_shop
 
-3. **Configure environment variables:**
-   - Copy `backend/.env.example` to `backend/.env`
-   - Update database credentials in `backend/.env`
+   # Run migrations
+   psql -U postgres -d sweet_shop -f backend\migrations\001_initial_schema.sql
+   psql -U postgres -d sweet_shop -f backend\migrations\003_create_purchases_table.sql
+   ```
+   
+   **Or using pgAdmin:**
+   - Open pgAdmin
+   - Create a new database named `sweet_shop`
+   - Right-click on the database → Query Tool
+   - Open and run `backend/migrations/001_initial_schema.sql`
+   - Open and run `backend/migrations/003_create_purchases_table.sql`
 
-4. **Start the backend:**
+5. **Configure environment variables:**
+   - Navigate to `backend` folder
+   - Create a `.env` file (copy from `.env.example` if it exists)
+   - Add the following variables:
+     ```env
+     DB_HOST=localhost
+     DB_PORT=5432
+     DB_NAME=sweet_shop
+     DB_USER=postgres
+     DB_PASSWORD=your_password
+     JWT_SECRET=your-super-secret-jwt-key-change-in-production
+     NODE_ENV=development
+     ```
+
+6. **Start the backend:**
    ```bash
    cd backend
    npm run dev
    ```
    Backend runs on http://localhost:3001
 
-5. **Start the frontend (in a new terminal):**
+7. **Start the frontend (in a new terminal):**
    ```bash
    cd frontend
    npm run dev
    ```
    Frontend runs on http://localhost:3000
+
+## Demo Users
+
+For testing purposes, the following demo accounts are available:
+
+### Regular User
+- **Email:** `demo@example.com`
+- **Password:** `demo123`
+- **Access:** Can view sweets, search, and make purchases
+
+### Admin User
+- **Email:** `admin@example.com`
+- **Password:** `admin123`
+- **Access:** Full access including:
+  - All regular user features
+  - Add, edit, and delete sweets
+  - Restock inventory
+  - View admin panel
+
+> **Note:** These demo users are for testing only. Make sure to create your own accounts in production.
 
 ## Manual Setup
 
