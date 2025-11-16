@@ -50,7 +50,7 @@ export const SweetCard = ({ sweet, onPurchase }: SweetCardProps) => {
               : 'bg-primary-600 dark:bg-primary-500 text-white hover:bg-primary-700 dark:hover:bg-primary-600 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]'
           }`}
         >
-          {isOutOfStock ? 'Out of Stock' : 'Add to Cart 🛒'}
+          {isOutOfStock ? 'Out of Stock' : 'Purchase'}
         </button>
       </div>
     </div>
