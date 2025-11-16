@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -7,14 +8,21 @@ import { Dashboard } from './pages/Dashboard';
 import { AdminPanel } from './pages/AdminPanel';
 import { PurchaseHistory } from './pages/PurchaseHistory';
 import { useAuthStore } from './store/authStore';
+import { useThemeStore } from './store/themeStore';
 
 function App() {
   const { isAuthenticated } = useAuthStore();
-  const {user} = useAuthStore();
+  const { user } = useAuthStore();
+  const { theme } = useThemeStore();
+
+  useEffect(() => {
+    // Ensure theme is applied on mount
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
         <Navbar />
         <Routes>
           <Route
