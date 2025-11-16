@@ -21,12 +21,15 @@ export const Navbar = () => {
             {user ? (
               <>
                 <span className="text-sm">Welcome, {user.email}</span>
-                <Link
+                {!isAdmin() && (
+                  <Link
                   to="/purchases"
                   className="px-4 py-2 bg-primary-700 rounded hover:bg-primary-800 transition"
                 >
                   My Purchases
                 </Link>
+                )}
+
                 {isAdmin() && (
                   <Link
                     to="/admin"
