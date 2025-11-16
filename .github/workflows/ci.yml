@@ -1,0 +1,113 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          # Using secrets with fallback to default test values
+          # These are safe to expose as they're only for CI test database
+          POSTGRES_USER: ${{ secrets.TEST_DB_USER || 'postgres' }}
+          POSTGRES_PASSWORD: ${{ secrets.TEST_DB_PASSWORD || 'postgres' }}
+          POSTGRES_DB: ${{ secrets.TEST_DB_NAME || 'sweet_shop_test' }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    env:
+      NODE_ENV: test
+      TEST_DB_HOST: localhost
+      TEST_DB_PORT: 5432
+      TEST_DB_NAME: ${{ secrets.TEST_DB_NAME || 'sweet_shop_test' }}
+      TEST_DB_USER: ${{ secrets.TEST_DB_USER || 'postgres' }}
+      TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD || 'postgres' }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET || 'test-secret-key-for-ci-cd-pipeline' }}
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: ${{ secrets.TEST_DB_NAME || 'sweet_shop_test' }}
+      DB_USER: ${{ secrets.TEST_DB_USER || 'postgres' }}
+      DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD || 'postgres' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Create test database
+        env:
+          DB_USER: ${{ secrets.TEST_DB_USER || 'postgres' }}
+          DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD || 'postgres' }}
+          DB_NAME: ${{ secrets.TEST_DB_NAME || 'sweet_shop_test' }}
+        run: |
+          PGPASSWORD=$DB_PASSWORD psql -h localhost -U $DB_USER -c "CREATE DATABASE $DB_NAME;" || true
+
+      - name: Run database migrations
+        env:
+          DB_USER: ${{ secrets.TEST_DB_USER || 'postgres' }}
+          DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD || 'postgres' }}
+          DB_NAME: ${{ secrets.TEST_DB_NAME || 'sweet_shop_test' }}
+        working-directory: ./backend
+        run: |
+          PGPASSWORD=$DB_PASSWORD psql -h localhost -U $DB_USER -d $DB_NAME -f migrations/001_initial_schema.sql
+          PGPASSWORD=$DB_PASSWORD psql -h localhost -U $DB_USER -d $DB_NAME -f migrations/004_create_purchases_table.sql
+
+      - name: Run backend tests
+        working-directory: ./backend
+        run: npm test
+
+      - name: Run backend tests with coverage
+        working-directory: ./backend
+        run: npm run test:coverage
+
+      - name: Run frontend lint
+        working-directory: ./frontend
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Upload test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          directory: ./backend/coverage
+          flags: backend
+          name: backend-coverage
+        continue-on-error: true
+

@@ -138,6 +138,31 @@ npm run test:watch    # Watch mode
 npm run test:coverage # Coverage report
 ```
 
+### Automated Testing with GitHub Actions
+
+This project uses GitHub Actions for continuous integration. Tests automatically run on:
+- Every push to `main` or `develop` branches
+- Every pull request targeting `main` or `develop`
+
+**What gets tested:**
+- ✅ Backend test suite (Jest)
+- ✅ Database migrations
+- ✅ Frontend linting
+- ✅ Frontend build
+- ✅ Test coverage reports
+
+**View test results:**
+1. Go to the "Actions" tab in your GitHub repository
+2. Click on any workflow run to see detailed results
+3. Green checkmark ✅ = all tests passed
+4. Red X ❌ = tests failed (click to see details)
+
+**Workflow files:**
+- `.github/workflows/ci.yml` - Main CI/CD pipeline
+- `.github/workflows/test.yml` - Test suite only
+
+For more details, see [.github/workflows/README.md](.github/workflows/README.md)
+
 ## Development Approach
 
 This project follows **Test-Driven Development (TDD)** principles:
@@ -239,6 +264,33 @@ Throughout the Git history, you'll find commits with co-author trailers indicati
 - `Co-authored-by: Claude <noreply@anthropic.com>` - For complex frontend components and UI development
 
 This transparency ensures that AI contributions are properly attributed while maintaining clear ownership of the codebase.
+
+## Deployment
+
+### Deploy to Vercel
+
+This project can be deployed **fully on Vercel** (frontend + backend) or use a hybrid approach.
+
+**Option 1: Full Stack on Vercel (Recommended) ⭐**
+1. Deploy backend to Vercel as serverless functions (see [VERCEL_BACKEND_DEPLOYMENT.md](VERCEL_BACKEND_DEPLOYMENT.md))
+2. Deploy frontend to Vercel
+3. Set up external database (Supabase recommended - free)
+4. Configure environment variables
+
+**Option 2: Hybrid Deployment**
+1. Deploy backend to Railway or Render (see [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md))
+2. Deploy frontend to Vercel
+3. Set `VITE_API_URL` environment variable in Vercel to your backend URL
+
+**Detailed Guides:**
+- Full stack on Vercel: [VERCEL_BACKEND_DEPLOYMENT.md](VERCEL_BACKEND_DEPLOYMENT.md)
+- Hybrid deployment: [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)
+
+### Deployment Platforms
+
+- **Frontend**: Vercel (recommended) or Netlify
+- **Backend**: Vercel (serverless), Railway, Render, or Heroku
+- **Database**: Supabase (free), Railway, Render, or Neon
 
 ## License
 
