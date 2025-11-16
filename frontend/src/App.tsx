@@ -10,6 +10,7 @@ import { useAuthStore } from './store/authStore';
 
 function App() {
   const { isAuthenticated } = useAuthStore();
+  const {user} = useAuthStore();
 
   return (
     <Router>
@@ -28,7 +29,10 @@ function App() {
             path="/"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                {(user && user.isAdmin) 
+                  ? <Navigate to="/admin" replace /> 
+                  : <Dashboard />
+                }
               </ProtectedRoute>
             }
           />
