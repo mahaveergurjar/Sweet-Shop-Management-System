@@ -354,7 +354,4 @@ This project can be deployed **fully on Vercel** (frontend + backend) or use a h
 - **Backend**: Vercel (serverless), Railway, Render, or Heroku
 - **Database**: Supabase (free), Railway, Render, or Neon
 
-## License
-
-ISC
 
