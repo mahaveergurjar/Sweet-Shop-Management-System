@@ -46,7 +46,17 @@ export const Dashboard = () => {
   const handlePurchase = async (id: number) => {
     try {
       await sweetService.purchase(id, 1);
-      await loadSweets(); // Reload to get updated quantities
+      // Update only the purchased sweet to maintain card positions
+      setSweets((prevSweets) =>
+        prevSweets.map((sweet) =>
+          sweet.id === id ? { ...sweet, quantity: Math.max(0, sweet.quantity - 1) } : sweet
+        )
+      );
+      setFilteredSweets((prevFiltered) =>
+        prevFiltered.map((sweet) =>
+          sweet.id === id ? { ...sweet, quantity: Math.max(0, sweet.quantity - 1) } : sweet
+        )
+      );
     } catch (err: any) {
       alert(err.response?.data?.error || 'Purchase failed');
     }
