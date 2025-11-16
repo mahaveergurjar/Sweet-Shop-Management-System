@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-in-production';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
@@ -10,6 +10,7 @@ export interface TokenPayload {
 }
 
 export const generateToken = (payload: TokenPayload): string => {
+  // @ts-ignore - JWT_EXPIRES_IN is a valid string value for expiresIn
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 };
 

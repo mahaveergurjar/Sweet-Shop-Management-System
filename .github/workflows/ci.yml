@@ -84,14 +84,20 @@ jobs:
         working-directory: ./backend
         run: |
           PGPASSWORD=$DB_PASSWORD psql -h localhost -U $DB_USER -d $DB_NAME -f migrations/001_initial_schema.sql
-          PGPASSWORD=$DB_PASSWORD psql -h localhost -U $DB_USER -d $DB_NAME -f migrations/004_create_purchases_table.sql
+          PGPASSWORD=$DB_PASSWORD psql -h localhost -U $DB_USER -d $DB_NAME -f migrations/003_create_purchases_table.sql
 
       - name: Run backend tests
         working-directory: ./backend
+        env:
+          NODE_ENV: test
+          JWT_SECRET: ${{ secrets.JWT_SECRET || 'test-secret-key-for-ci-cd-pipeline' }}
         run: npm test
 
       - name: Run backend tests with coverage
         working-directory: ./backend
+        env:
+          NODE_ENV: test
+          JWT_SECRET: ${{ secrets.JWT_SECRET || 'test-secret-key-for-ci-cd-pipeline' }}
         run: npm run test:coverage
 
       - name: Run frontend lint

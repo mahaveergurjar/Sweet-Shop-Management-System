@@ -58,8 +58,8 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// Only start server if not in Vercel serverless environment
-if (process.env.VERCEL !== '1') {
+// Only start server if not in Vercel serverless environment and not in test environment
+if (process.env.VERCEL !== '1' && process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
