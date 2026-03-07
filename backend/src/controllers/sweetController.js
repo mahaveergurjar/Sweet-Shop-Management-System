@@ -1,36 +1,33 @@
-import { SweetService } from '../services/sweetService.js';
-import { validationResult } from 'express-validator';
+import { SweetService } from "../services/sweetService.js";
+import { validationResult } from "express-validator";
 export class SweetController {
   static async createSweet(req, res) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array()
+          errors: errors.array(),
         });
         return;
       }
-      const {
-        name,
-        category,
-        price,
-        quantity
-      } = req.body;
+      const { name, category, price, quantity, unit, image_url } = req.body;
       const sweet = await SweetService.createSweet({
         name,
         category,
         price,
-        quantity
+        quantity,
+        unit,
+        image_url,
       });
       res.status(201).json(sweet);
     } catch (error) {
-      if (error.message.includes('cannot be negative')) {
+      if (error.message.includes("cannot be negative")) {
         res.status(400).json({
-          error: error.message
+          error: error.message,
         });
       } else {
         res.status(500).json({
-          error: 'Internal server error'
+          error: "Internal server error",
         });
       }
     }
@@ -41,29 +38,24 @@ export class SweetController {
       res.status(200).json(sweets);
     } catch (error) {
       res.status(500).json({
-        error: 'Internal server error'
+        error: "Internal server error",
       });
     }
   }
   static async searchSweets(req, res) {
     try {
-      const {
-        name,
-        category,
-        minPrice,
-        maxPrice
-      } = req.query;
+      const { name, category, minPrice, maxPrice } = req.query;
       const filters = {
         name: name,
         category: category,
         minPrice: minPrice ? parseFloat(minPrice) : undefined,
-        maxPrice: maxPrice ? parseFloat(maxPrice) : undefined
+        maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
       };
       const sweets = await SweetService.searchSweets(filters);
       res.status(200).json(sweets);
     } catch (error) {
       res.status(500).json({
-        error: 'Internal server error'
+        error: "Internal server error",
       });
     }
   }
@@ -73,13 +65,13 @@ export class SweetController {
       const sweet = await SweetService.getSweetById(id);
       res.status(200).json(sweet);
     } catch (error) {
-      if (error.message === 'Sweet not found') {
+      if (error.message === "Sweet not found") {
         res.status(404).json({
-          error: error.message
+          error: error.message,
         });
       } else {
         res.status(500).json({
-          error: 'Internal server error'
+          error: "Internal server error",
         });
       }
     }
@@ -89,36 +81,33 @@ export class SweetController {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array()
+          errors: errors.array(),
         });
         return;
       }
       const id = parseInt(req.params.id);
-      const {
-        name,
-        category,
-        price,
-        quantity
-      } = req.body;
+      const { name, category, price, quantity, unit, image_url } = req.body;
       const sweet = await SweetService.updateSweet(id, {
         name,
         category,
         price,
-        quantity
+        quantity,
+        unit,
+        image_url,
       });
       res.status(200).json(sweet);
     } catch (error) {
-      if (error.message === 'Sweet not found') {
+      if (error.message === "Sweet not found") {
         res.status(404).json({
-          error: error.message
+          error: error.message,
         });
-      } else if (error.message.includes('cannot be negative')) {
+      } else if (error.message.includes("cannot be negative")) {
         res.status(400).json({
-          error: error.message
+          error: error.message,
         });
       } else {
         res.status(500).json({
-          error: 'Internal server error'
+          error: "Internal server error",
         });
       }
     }
@@ -129,13 +118,13 @@ export class SweetController {
       const result = await SweetService.deleteSweet(id);
       res.status(200).json(result);
     } catch (error) {
-      if (error.message === 'Sweet not found') {
+      if (error.message === "Sweet not found") {
         res.status(404).json({
-          error: error.message
+          error: error.message,
         });
       } else {
         res.status(500).json({
-          error: 'Internal server error'
+          error: "Internal server error",
         });
       }
     }
@@ -145,7 +134,7 @@ export class SweetController {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array()
+          errors: errors.array(),
         });
         return;
       }
@@ -157,7 +146,7 @@ export class SweetController {
       const sweetBeforePurchase = await SweetService.getSweetById(id);
       if (!sweetBeforePurchase) {
         res.status(404).json({
-          error: 'Sweet not found'
+          error: "Sweet not found",
         });
         return;
       }
@@ -166,17 +155,17 @@ export class SweetController {
       const sweet = await SweetService.purchaseSweet(id, quantity, userId);
       res.status(200).json(sweet);
     } catch (error) {
-      if (error.message === 'Sweet not found or insufficient quantity') {
+      if (error.message === "Sweet not found or insufficient quantity") {
         res.status(400).json({
-          error: error.message
+          error: error.message,
         });
-      } else if (error.message.includes('must be positive')) {
+      } else if (error.message.includes("must be positive")) {
         res.status(400).json({
-          error: error.message
+          error: error.message,
         });
       } else {
         res.status(500).json({
-          error: 'Internal server error'
+          error: "Internal server error",
         });
       }
     }
@@ -186,28 +175,26 @@ export class SweetController {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array()
+          errors: errors.array(),
         });
         return;
       }
       const id = parseInt(req.params.id);
-      const {
-        quantity
-      } = req.body;
+      const { quantity } = req.body;
       const sweet = await SweetService.restockSweet(id, quantity);
       res.status(200).json(sweet);
     } catch (error) {
-      if (error.message === 'Sweet not found') {
+      if (error.message === "Sweet not found") {
         res.status(404).json({
-          error: error.message
+          error: error.message,
         });
-      } else if (error.message.includes('must be positive')) {
+      } else if (error.message.includes("must be positive")) {
         res.status(400).json({
-          error: error.message
+          error: error.message,
         });
       } else {
         res.status(500).json({
-          error: 'Internal server error'
+          error: "Internal server error",
         });
       }
     }

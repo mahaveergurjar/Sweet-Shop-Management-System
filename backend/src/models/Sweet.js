@@ -8,6 +8,8 @@ export class SweetModel {
         category: input.category,
         price: input.price,
         quantity: input.quantity || 0,
+        unit: input.unit || "piece",
+        image_url: input.image_url || null,
       },
     });
   }

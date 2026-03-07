@@ -287,7 +287,7 @@ export const AdminPanel = () => {
                         className:
                           "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
                       },
-                      sweet.quantity,
+                      `${sweet.quantity} ${sweet.unit || "piece"}`,
                     ),
                     /*#__PURE__*/ React.createElement(
                       "td",
