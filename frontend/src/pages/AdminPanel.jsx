@@ -3,6 +3,8 @@ import { sweetService } from "../services/api";
 import { SweetForm } from "../components/SweetForm";
 import { SweetEditModal } from "../components/SweetEditModal";
 import { AnalyticsDashboard } from "../components/AnalyticsDashboard";
+import toast from "react-hot-toast";
+
 export const AdminPanel = () => {
   const [sweets, setSweets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ export const AdminPanel = () => {
       const data = await sweetService.getAll();
       setSweets(data);
     } catch (err) {
-      alert(err.response?.data?.error || "Failed to load sweets");
+      toast.error(err.response?.data?.error || "Failed to load sweets");
     } finally {
       setLoading(false);
     }
@@ -26,18 +28,20 @@ export const AdminPanel = () => {
     try {
       await sweetService.create(input);
       setShowForm(false);
+      toast.success("Sweet created successfully");
       await loadSweets();
     } catch (err) {
-      alert(err.response?.data?.error || "Failed to create sweet");
+      toast.error(err.response?.data?.error || "Failed to create sweet");
     }
   };
   const handleUpdate = async (id, input) => {
     try {
       await sweetService.update(id, input);
       setEditingSweet(null);
+      toast.success("Sweet updated successfully");
       await loadSweets();
     } catch (err) {
-      alert(err.response?.data?.error || "Failed to update sweet");
+      toast.error(err.response?.data?.error || "Failed to update sweet");
     }
   };
   const handleDelete = async (id) => {
@@ -46,17 +50,19 @@ export const AdminPanel = () => {
     }
     try {
       await sweetService.delete(id);
+      toast.success("Sweet deleted successfully");
       await loadSweets();
     } catch (err) {
-      alert(err.response?.data?.error || "Failed to delete sweet");
+      toast.error(err.response?.data?.error || "Failed to delete sweet");
     }
   };
   const handleRestock = async (id, quantity) => {
     try {
       await sweetService.restock(id, quantity);
+      toast.success("Inventory restocked");
       await loadSweets();
     } catch (err) {
-      alert(err.response?.data?.error || "Failed to restock sweet");
+      toast.error(err.response?.data?.error || "Failed to restock sweet");
     }
   };
   return /*#__PURE__*/ React.createElement(

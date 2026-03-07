@@ -1,6 +1,7 @@
 import React from "react";
 import { useCartStore } from "../store/cartStore";
 import { purchaseService } from "../services/api";
+import toast from "react-hot-toast";
 
 export const CartDrawer = ({ isOpen, onClose }) => {
   const { items, removeItem, updateQuantity, getTotal, clearCart } =
@@ -26,12 +27,13 @@ export const CartDrawer = ({ isOpen, onClose }) => {
 
       await purchaseService.batchPurchase(purchaseItems);
       clearCart();
-      alert("Checkout successful! Thank you for your purchase.");
+      toast.success("Checkout successful! Thank you for your purchase.");
       onClose();
     } catch (err) {
-      setError(
-        err.response?.data?.error || "Checkout failed. Please try again.",
-      );
+      const errorMessage =
+        err.response?.data?.error || "Checkout failed. Please try again.";
+      setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -130,7 +132,10 @@ export const CartDrawer = ({ isOpen, onClose }) => {
                       ₹{(Number(item.price) * item.cartQuantity).toFixed(2)}
                     </p>
                     <button
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => {
+                        removeItem(item.id);
+                        toast.success("Item removed from cart");
+                      }}
                       className="text-xs text-red-500 hover:underline mt-1"
                     >
                       Remove

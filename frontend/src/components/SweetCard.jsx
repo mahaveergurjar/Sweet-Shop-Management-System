@@ -1,15 +1,31 @@
 import React from "react";
 import { useCartStore } from "../store/cartStore";
+import toast from "react-hot-toast";
 
 export const SweetCard = ({ sweet }) => {
   const { addItem } = useCartStore();
   const isOutOfStock = sweet.quantity === 0;
 
+  const handleAddToCart = () => {
+    addItem(sweet);
+    toast.success(`Added ${sweet.name} to cart!`);
+  };
+
   return (
     <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 overflow-hidden hover:shadow-2xl dark:hover:shadow-gray-900 transition-all duration-500 border border-gray-100 dark:border-gray-700 transform hover:-translate-y-2">
-      {/* Decorative Image/Emoji Area */}
-      <div className="h-40 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform duration-500">
-        🍬
+      {/* Image Area */}
+      <div className="h-40 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden">
+        {sweet.image_url ? (
+          <img
+            src={sweet.image_url}
+            alt={sweet.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        ) : (
+          <span className="text-7xl group-hover:scale-110 transition-transform duration-500">
+            🍬
+          </span>
+        )}
       </div>
 
       <div className="p-6">
@@ -45,7 +61,7 @@ export const SweetCard = ({ sweet }) => {
         </div>
 
         <button
-          onClick={() => addItem(sweet)}
+          onClick={handleAddToCart}
           disabled={isOutOfStock}
           className={`w-full py-3.5 px-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
             isOutOfStock
