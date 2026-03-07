@@ -1,74 +1,83 @@
-const { Pool } = require('pg');
-require('dotenv').config();
+const { PrismaClient } = require("@prisma/client");
+require("dotenv").config();
 
-const pool = new Pool({
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME || 'sweet_shop',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
-});
+const prisma = new PrismaClient();
 
 const demoData = [
-  ['Chocolate Bar', 'Chocolate', 25.00, 100],
-  ['Gummy Bears', 'Candy', 18.00, 150],
-  ['Lollipop', 'Candy', 8.00, 200],
-  ['Caramel Toffee', 'Toffee', 22.00, 80],
-  ['Mint Chocolate', 'Chocolate', 28.00, 120],
-  ['Jelly Beans', 'Candy', 18.00, 180],
-  ['Dark Chocolate', 'Chocolate', 45.00, 90],
-  ['Cotton Candy', 'Candy', 25.00, 60],
-  ['Fudge Brownie', 'Bakery', 55.00, 50],
-  ['Sour Patch Kids', 'Candy', 28.00, 130],
-  ['White Chocolate', 'Chocolate', 32.00, 110],
-  ['Rock Candy', 'Candy', 12.00, 140],
-  ['Truffles', 'Chocolate', 90.00, 40],
-  ['Licorice', 'Candy', 18.00, 100],
-  ['Peppermint Candy', 'Candy', 8.00, 250],
-  ['Chocolate Chip Cookie', 'Bakery', 35.00, 70],
-  ['Marshmallows', 'Candy', 22.00, 160],
-  ['Fruit Gummies', 'Candy', 22.00, 120],
-  ['Honeycomb', 'Toffee', 35.00, 55],
-  ['Chocolate Covered Nuts', 'Chocolate', 70.00, 65],
+  { name: "Chocolate Bar", category: "Chocolate", price: 25.0, quantity: 100 },
+  { name: "Gummy Bears", category: "Candy", price: 18.0, quantity: 150 },
+  { name: "Lollipop", category: "Candy", price: 8.0, quantity: 200 },
+  { name: "Caramel Toffee", category: "Toffee", price: 22.0, quantity: 80 },
+  { name: "Mint Chocolate", category: "Chocolate", price: 28.0, quantity: 120 },
+  { name: "Jelly Beans", category: "Candy", price: 18.0, quantity: 180 },
+  { name: "Dark Chocolate", category: "Chocolate", price: 45.0, quantity: 90 },
+  { name: "Cotton Candy", category: "Candy", price: 25.0, quantity: 60 },
+  { name: "Fudge Brownie", category: "Bakery", price: 55.0, quantity: 50 },
+  { name: "Sour Patch Kids", category: "Candy", price: 28.0, quantity: 130 },
+  {
+    name: "White Chocolate",
+    category: "Chocolate",
+    price: 32.0,
+    quantity: 110,
+  },
+  { name: "Rock Candy", category: "Candy", price: 12.0, quantity: 140 },
+  { name: "Truffles", category: "Chocolate", price: 90.0, quantity: 40 },
+  { name: "Licorice", category: "Candy", price: 18.0, quantity: 100 },
+  { name: "Peppermint Candy", category: "Candy", price: 8.0, quantity: 250 },
+  {
+    name: "Chocolate Chip Cookie",
+    category: "Bakery",
+    price: 35.0,
+    quantity: 70,
+  },
+  { name: "Marshmallows", category: "Candy", price: 22.0, quantity: 160 },
+  { name: "Fruit Gummies", category: "Candy", price: 22.0, quantity: 120 },
+  { name: "Honeycomb", category: "Toffee", price: 35.0, quantity: 55 },
+  {
+    name: "Chocolate Covered Nuts",
+    category: "Chocolate",
+    price: 70.0,
+    quantity: 65,
+  },
 ];
 
 async function addDemoData() {
   try {
-    console.log('🍬 Adding demo sweets data...\n');
-    
+    console.log("🍬 Adding demo sweets data...\n");
+
     // Check if data already exists
-    const checkResult = await pool.query('SELECT COUNT(*) FROM sweets');
-    const existingCount = parseInt(checkResult.rows[0].count);
-    
+    const existingCount = await prisma.sweet.count();
+
     if (existingCount > 0) {
       console.log(`⚠️  Database already contains ${existingCount} sweets.`);
-      console.log('Skipping demo data insertion to avoid duplicates.\n');
-      console.log('If you want to add demo data anyway, clear the sweets table first.');
-      await pool.end();
+      console.log("Skipping demo data insertion to avoid duplicates.\n");
+      console.log(
+        "If you want to add demo data anyway, clear the sweets table first.",
+      );
+      await prisma.$disconnect();
       return;
     }
 
     // Insert demo data
-    const insertQuery = `
-      INSERT INTO sweets (name, category, price, quantity) 
-      VALUES ($1, $2, $3, $4)
-    `;
-
-    for (const [name, category, price, quantity] of demoData) {
-      await pool.query(insertQuery, [name, category, price, quantity]);
-      console.log(`✅ Added: ${name} (${category}) - ₹${price.toFixed(2)}`);
+    for (const sweet of demoData) {
+      await prisma.sweet.create({ data: sweet });
+      console.log(
+        `✅ Added: ${sweet.name} (${sweet.category}) - ₹${sweet.price.toFixed(2)}`,
+      );
     }
 
-    console.log(`\n✅ Successfully added ${demoData.length} sweets to the database!`);
-    console.log('You can now view them in the application at http://localhost:3000\n');
-    
+    console.log(
+      `\n✅ Successfully added ${demoData.length} sweets to the database!`,
+    );
+    console.log(
+      "You can now view them in the application at http://localhost:3000\n",
+    );
   } catch (error) {
-    console.error('❌ Error adding demo data:', error.message);
+    console.error("❌ Error adding demo data:", error.message);
     process.exit(1);
   } finally {
-    await pool.end();
+    await prisma.$disconnect();
   }
 }
 
 addDemoData();
-
