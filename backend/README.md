@@ -5,20 +5,23 @@ Backend API for the Sweet Shop Management System built with Node.js, TypeScript,
 ## Setup
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
-2. Set up PostgreSQL database:
-```bash
-# Create database
-createdb sweet_shop
+2. Set up PostgreSQL database via Prisma ORM:
 
-# Run migrations
-psql -d sweet_shop -f migrations/001_initial_schema.sql
+```bash
+# Push database schema & generate client
+npm run migrate:dev
+
+# Seed database with authentic Indian sweets demo data
+npm run db:seed
 ```
 
 3. Create `.env` file from `.env.example`:
+
 ```bash
 cp .env.example .env
 ```
@@ -26,6 +29,7 @@ cp .env.example .env
 4. Update `.env` with your database credentials.
 
 5. Run the server:
+
 ```bash
 # Development mode
 npm run dev
@@ -35,22 +39,15 @@ npm run build
 npm start
 ```
 
-## Testing
-
-Run tests:
-```bash
-npm test
-npm run test:watch
-npm run test:coverage
-```
-
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - Register a new user
 - `POST /api/auth/login` - Login user
 
 ### Sweets (Protected)
+
 - `GET /api/sweets` - Get all sweets
 - `GET /api/sweets/search` - Search sweets (query params: name, category, minPrice, maxPrice)
 - `GET /api/sweets/:id` - Get sweet by ID
@@ -63,7 +60,7 @@ npm run test:coverage
 ## Authentication
 
 All protected endpoints require a Bearer token in the Authorization header:
+
 ```
 Authorization: Bearer <token>
 ```
-

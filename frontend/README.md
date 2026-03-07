@@ -5,11 +5,13 @@ Modern React + TypeScript frontend for the Sweet Shop Management System.
 ## Setup
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start development server:
+
 ```bash
 npm run dev
 ```
@@ -30,6 +32,7 @@ npm run build
 - Purchase functionality
 - Admin panel for CRUD operations
 - Responsive design with Tailwind CSS
+- Flash notifications via react-hot-toast
 
 ## Tech Stack
 
@@ -40,4 +43,4 @@ npm run build
 - Zustand (state management)
 - Axios (HTTP client)
 - Tailwind CSS
-
+- React Hot Toast
