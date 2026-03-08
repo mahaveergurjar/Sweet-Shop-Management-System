@@ -38,7 +38,7 @@ async function main() {
       quantity: 50,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1605197148970-d9da1b6fc2be?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Gulab_jamun_%28Gibraltar%29.jpg/640px-Gulab_jamun_%28Gibraltar%29.jpg",
     },
     {
       name: "Rasgulla",
@@ -47,7 +47,7 @@ async function main() {
       quantity: 40,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Rasgulla.jpg/640px-Rasgulla.jpg",
     },
     {
       name: "Kaju Katli",
@@ -56,7 +56,7 @@ async function main() {
       quantity: 20,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1631505971150-a8d297ff04e9?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Kaju_Katli_-_Indian_Sweet.jpg/640px-Kaju_Katli_-_Indian_Sweet.jpg",
     },
     {
       name: "Motichoor Ladoo",
@@ -65,7 +65,7 @@ async function main() {
       quantity: 30,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Motichoor_Laddu.jpg/640px-Motichoor_Laddu.jpg",
     },
     {
       name: "Besan Ladoo",
@@ -74,7 +74,7 @@ async function main() {
       quantity: 25,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1615486511484-92e172fc4e0c?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Laddu_of_Besan.jpg/640px-Laddu_of_Besan.jpg",
     },
     {
       name: "Jalebi",
@@ -83,7 +83,7 @@ async function main() {
       quantity: 30,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1589116891005-7243c3d5a767?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Jalebi.jpg/640px-Jalebi.jpg",
     },
     {
       name: "Rasmalai",
@@ -92,7 +92,7 @@ async function main() {
       quantity: 120,
       unit: "piece",
       image_url:
-        "https://images.unsplash.com/photo-1627308595229-7830f5c92c90?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ras_Malai.jpg/640px-Ras_Malai.jpg",
     },
     {
       name: "Mysore Pak",
@@ -101,7 +101,7 @@ async function main() {
       quantity: 20,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mysore_pak.jpg/640px-Mysore_pak.jpg",
     },
     {
       name: "Soan Papdi",
@@ -110,7 +110,7 @@ async function main() {
       quantity: 80,
       unit: "box",
       image_url:
-        "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Soan_Papdi_3.jpg/640px-Soan_Papdi_3.jpg",
     },
     {
       name: "Ghevar",
@@ -119,7 +119,7 @@ async function main() {
       quantity: 40,
       unit: "piece",
       image_url:
-        "https://images.unsplash.com/photo-1621275990520-fe14ea7d8bba?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Ghevar_01.jpg/640px-Ghevar_01.jpg",
     },
     {
       name: "Peda",
@@ -128,7 +128,7 @@ async function main() {
       quantity: 30,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1585848245785-5b48ec42557e?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Peda_%28Indian_Sweet%29.jpg/640px-Peda_%28Indian_Sweet%29.jpg",
     },
     {
       name: "Milk Cake",
@@ -137,7 +137,7 @@ async function main() {
       quantity: 25,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Milk_Cake.jpg/640px-Milk_Cake.jpg",
     },
     {
       name: "Barfi",
@@ -146,7 +146,7 @@ async function main() {
       quantity: 50,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Barfi_sweet.jpg/640px-Barfi_sweet.jpg",
     },
     {
       name: "Kalakand",
@@ -155,7 +155,7 @@ async function main() {
       quantity: 15,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Kalakand_1.jpg/640px-Kalakand_1.jpg",
     },
     {
       name: "Petha",
@@ -164,7 +164,7 @@ async function main() {
       quantity: 60,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Agra_Petha.jpg/640px-Agra_Petha.jpg",
     },
     {
       name: "Cham Cham",
@@ -173,7 +173,7 @@ async function main() {
       quantity: 20,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1627308595229-7830f5c92c90?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Cham_Cham.jpg/640px-Cham_Cham.jpg",
     },
     {
       name: "Sandesh",
@@ -182,7 +182,7 @@ async function main() {
       quantity: 160,
       unit: "piece",
       image_url:
-        "https://images.unsplash.com/photo-1589116891005-7243c3d5a767?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Sandesh_sweet.JPG/640px-Sandesh_sweet.JPG",
     },
     {
       name: "Gujiya",
@@ -191,7 +191,7 @@ async function main() {
       quantity: 20,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1615486511484-92e172fc4e0c?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Gujiya_plate.jpg/640px-Gujiya_plate.jpg",
     },
     {
       name: "Shrikhand",
@@ -200,7 +200,7 @@ async function main() {
       quantity: 40,
       unit: "box",
       image_url:
-        "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Shrikhand.jpg/640px-Shrikhand.jpg",
     },
     {
       name: "Imarti",
@@ -209,7 +209,7 @@ async function main() {
       quantity: 25,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1589116891005-7243c3d5a767?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Imarti_Sweet.jpg/640px-Imarti_Sweet.jpg",
     },
     {
       name: "Boondi Ladoo",
@@ -218,7 +218,7 @@ async function main() {
       quantity: 40,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Boondi_ladoo.jpg/640px-Boondi_ladoo.jpg",
     },
     {
       name: "Badam Halwa",
@@ -227,7 +227,7 @@ async function main() {
       quantity: 10,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1605197148970-d9da1b6fc2be?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Badam_Halwa.JPG/640px-Badam_Halwa.JPG",
     },
     {
       name: "Dodha Barfi",
@@ -236,7 +236,7 @@ async function main() {
       quantity: 15,
       unit: "kg",
       image_url:
-        "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Dodha_Barfi.jpg/640px-Dodha_Barfi.jpg",
     },
     {
       name: "Malpua",
@@ -245,7 +245,7 @@ async function main() {
       quantity: 80,
       unit: "piece",
       image_url:
-        "https://images.unsplash.com/photo-1621275990520-fe14ea7d8bba?auto=format&fit=crop&q=80&w=600",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Malpua.JPG/640px-Malpua.JPG",
     },
   ];
 

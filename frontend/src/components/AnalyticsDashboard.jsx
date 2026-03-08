@@ -56,25 +56,41 @@ export const AnalyticsDashboard = () => {
           {
             label: "Total Revenue",
             value: `₹${summary.totalRevenue}`,
-            icon: "💰",
+            icon: (
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z" />
+              </svg>
+            ),
             color: "text-green-600",
           },
           {
             label: "Total Orders",
             value: summary.totalOrders,
-            icon: "📦",
+            icon: (
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 8h-3V4H3v12h2v4h16V8zM5 6h10v8H5V6zm14 12H7v-2h10V10h2v8z" />
+              </svg>
+            ),
             color: "text-blue-600",
           },
           {
             label: "Total Sweets",
             value: summary.totalSweets,
-            icon: "🍬",
-            color: "text-purple-600",
+            icon: (
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L4 5v14l8 3 8-3V5l-8-3zm0 2.18L18.15 6.5 12 8.82 5.85 6.5 12 4.18zM6 8.58l5 1.88v9.36l-5-1.88V8.58zm7 11.24V10.46l5-1.88v9.36l-5 1.88z" />
+              </svg>
+            ),
+            color: "text-primary-600",
           },
           {
             label: "Total Users",
             value: summary.totalUsers,
-            icon: "👥",
+            icon: (
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+              </svg>
+            ),
             color: "text-orange-600",
           },
         ].map((item, idx) => (
