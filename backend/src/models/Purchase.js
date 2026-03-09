@@ -37,7 +37,7 @@ export class PurchaseModel {
 
         if (!sweet || sweet.quantity < item.quantity) {
           throw new Error(
-            `Insufficient stock for ${item.sweet_name || "sweet"}`,
+            `Insufficient stock for ${item.sweet_name || sweet?.name || "sweet"}. Available: ${sweet?.quantity || 0}`,
           );
         }
 

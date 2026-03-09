@@ -11,6 +11,9 @@ export const useCartStore = create()(
         const existingItem = items.find((item) => item.id === sweet.id);
 
         if (existingItem) {
+          if (existingItem.cartQuantity >= sweet.quantity) {
+            return false; // Indicate failure due to stock
+          }
           set({
             items: items.map((item) =>
               item.id === sweet.id
@@ -19,10 +22,14 @@ export const useCartStore = create()(
             ),
           });
         } else {
+          if (sweet.quantity < 1) {
+            return false; // Indicate failure due to stock
+          }
           set({
             items: [...items, { ...sweet, cartQuantity: 1 }],
           });
         }
+        return true; // Indicate success
       },
 
       removeItem: (sweetId) => {
@@ -32,12 +39,19 @@ export const useCartStore = create()(
       },
 
       updateQuantity: (sweetId, quantity) => {
+        const items = get().items;
+        const item = items.find((i) => i.id === sweetId);
+        if (!item) return;
+
+        // Ensure we don't exceed stock
+        const newQuantity = Math.max(0, Math.min(quantity, item.quantity));
+
         set({
-          items: get()
-            .items.map((item) =>
-              item.id === sweetId ? { ...item, cartQuantity: quantity } : item,
+          items: items
+            .map((i) =>
+              i.id === sweetId ? { ...i, cartQuantity: newQuantity } : i,
             )
-            .filter((item) => item.cartQuantity > 0),
+            .filter((i) => i.cartQuantity > 0),
         });
       },
 

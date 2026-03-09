@@ -135,7 +135,7 @@ export const CartDrawer = ({ isOpen, onClose }) => {
                       {item.name}
                     </h3>
                     <p className="text-xs font-black text-primary-500 uppercase tracking-widest mb-3">
-                      ₹{Number(item.price).toFixed(2)}
+                      ₹{Number(item.price).toFixed(2)} / {item.unit || "piece"}
                     </p>
                     <div className="flex items-center gap-1">
                       <button
@@ -153,7 +153,17 @@ export const CartDrawer = ({ isOpen, onClose }) => {
                         onClick={() =>
                           updateQuantity(item.id, item.cartQuantity + 1)
                         }
-                        className="w-8 h-8 rounded-xl border border-gray-100 flex items-center justify-center hover:bg-white hover:border-primary-200 hover:shadow-sm transition-all text-gray-400 font-black"
+                        disabled={item.cartQuantity >= item.quantity}
+                        className={`w-8 h-8 rounded-xl border border-gray-100 flex items-center justify-center transition-all font-black ${
+                          item.cartQuantity >= item.quantity
+                            ? "bg-gray-50 text-gray-300 cursor-not-allowed"
+                            : "hover:bg-white hover:border-primary-200 hover:shadow-sm text-gray-400"
+                        }`}
+                        title={
+                          item.cartQuantity >= item.quantity
+                            ? "Max stock reached"
+                            : ""
+                        }
                       >
                         +
                       </button>

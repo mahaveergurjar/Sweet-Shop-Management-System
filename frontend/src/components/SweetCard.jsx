@@ -7,8 +7,12 @@ export const SweetCard = ({ sweet }) => {
   const isOutOfStock = sweet.quantity === 0;
 
   const handleAddToCart = () => {
-    addItem(sweet);
-    toast.success(`Added ${sweet.name} to cart!`);
+    const success = addItem(sweet);
+    if (success) {
+      toast.success(`Added ${sweet.name} to cart!`);
+    } else {
+      toast.error(`Cannot add more ${sweet.name}. Stock limit reached!`);
+    }
   };
 
   return (
@@ -53,6 +57,9 @@ export const SweetCard = ({ sweet }) => {
           </span>
           <span className="text-xs font-bold text-gray-400 mt-2">
             .{(sweet.price % 1).toFixed(2).split(".")[1]}
+          </span>
+          <span className="text-xs font-bold text-gray-400 mt-2 ml-1">
+            / {sweet.unit || "piece"}
           </span>
         </div>
 
