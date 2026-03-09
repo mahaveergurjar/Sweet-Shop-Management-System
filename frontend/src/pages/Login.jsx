@@ -19,11 +19,12 @@ export const Login = () => {
     try {
       const response = await authService.login(email, password);
       setAuth(response.user, response.token);
-      toast.success("Shubh Aagman! Welcome back.");
+      toast.success("Shubh Aagman! Welcome back to Royal Sweets.");
       navigate("/");
     } catch (err) {
       const errorMessage =
-        err.response?.data?.error || "Login failed. Please try again.";
+        err.response?.data?.error ||
+        "We couldn't verify your credentials. Please double-check and try again.";
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -89,12 +90,27 @@ export const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary-500 text-white py-4.5 rounded-2xl font-bold shadow-md hover:shadow-lg transition-all active:scale-98 transform hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-3"
+              className="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white py-5 rounded-2xl font-bold font-serif text-lg shadow-[0_10px_20px_-10px_rgba(255,193,7,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,193,7,0.6)] transition-all active:scale-[0.97] transform hover:-translate-y-1 disabled:opacity-50 flex items-center justify-center gap-4 group"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
               ) : (
-                "Proceed to Shop"
+                <>
+                  <span className="tracking-wide">Proceed to Shop</span>
+                  <svg
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="3"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </>
               )}
             </button>
           </form>

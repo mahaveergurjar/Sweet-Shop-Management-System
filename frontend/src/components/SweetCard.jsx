@@ -9,9 +9,11 @@ export const SweetCard = ({ sweet }) => {
   const handleAddToCart = () => {
     const success = addItem(sweet);
     if (success) {
-      toast.success(`Added ${sweet.name} to cart!`);
+      toast.success(`We've added ${sweet.name} to your sweet box!`);
     } else {
-      toast.error(`Cannot add more ${sweet.name}. Stock limit reached!`);
+      toast.error(
+        `Apologies! We've reached our current stock limit for ${sweet.name}.`,
+      );
     }
   };
 

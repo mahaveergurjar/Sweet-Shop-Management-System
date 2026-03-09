@@ -20,7 +20,35 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-white">
-        <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: "#fff",
+              color: "#1a1a1a",
+              padding: "16px 24px",
+              borderRadius: "20px",
+              fontSize: "15px",
+              fontWeight: "600",
+              boxShadow: "0 20px 40px -15px rgba(0,0,0,0.15)",
+              border: "1px solid rgba(255, 193, 7, 0.2)",
+              backdropFilter: "blur(10px)",
+            },
+            success: {
+              iconTheme: {
+                primary: "#FFC107",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: "#f44336",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
         <Navbar />
         <Routes>
           <Route

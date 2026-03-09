@@ -27,11 +27,14 @@ export const CartDrawer = ({ isOpen, onClose }) => {
 
       await purchaseService.batchPurchase(purchaseItems);
       clearCart();
-      toast.success("Checkout successful! Thank you for your purchase.");
+      toast.success(
+        "Thank you! Your order has been placed. We're preparing your sweets for delivery.",
+      );
       onClose();
     } catch (err) {
       const errorMessage =
-        err.response?.data?.error || "Checkout failed. Please try again.";
+        err.response?.data?.error ||
+        "We've encountered an issue with your order. Please try again.";
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -42,12 +45,12 @@ export const CartDrawer = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
       <div
-        className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
         onClick={onClose}
       ></div>
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex">
-        <div className="w-screen max-w-md bg-white shadow-[0_0_100px_rgba(0,0,0,0.1)] flex flex-col transform transition-transform duration-300 border-l border-amber-50 relative z-[60]">
+      <div className="fixed inset-y-0 right-0 max-w-full flex shadow-2xl">
+        <div className="w-screen max-w-md bg-white flex flex-col transform transition-transform duration-300 border-l border-primary-50 relative z-[60]">
           {/* Header */}
           <div className="px-8 py-8 border-b border-primary-50 flex justify-between items-center bg-white relative">
             {/* Decorative Header Pattern */}
@@ -86,7 +89,7 @@ export const CartDrawer = ({ isOpen, onClose }) => {
           </div>
 
           {/* Items List */}
-          <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8 bg-white/50">
+          <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8 bg-white">
             {error && (
               <div className="bg-red-50 text-red-600 p-4 rounded-2xl text-sm mb-6 font-bold border border-red-100 flex items-center gap-3 animate-shake">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
@@ -176,7 +179,9 @@ export const CartDrawer = ({ isOpen, onClose }) => {
                     <button
                       onClick={() => {
                         removeItem(item.id);
-                        toast.success("Shanti! Item removed");
+                        toast.success(
+                          `Removed ${item.name} from your collection.`,
+                        );
                       }}
                       className="text-[10px] font-black uppercase tracking-tighter text-red-400 hover:text-red-500 transition-colors"
                     >
@@ -190,7 +195,7 @@ export const CartDrawer = ({ isOpen, onClose }) => {
 
           {/* Footer / Summary */}
           {items.length > 0 && (
-            <div className="p-8 border-t border-primary-50 bg-primary-50/30 backdrop-blur-sm relative overflow-hidden">
+            <div className="p-8 border-t border-primary-50 bg-white relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-white opacity-50"></div>
 
               <div className="flex justify-between items-center mb-8">

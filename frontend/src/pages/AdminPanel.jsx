@@ -31,10 +31,13 @@ export const AdminPanel = () => {
     try {
       await sweetService.create(input);
       setShowForm(false);
-      toast.success("Sweet created successfully");
+      toast.success(`Successfully added ${input.name} to our royal catalog.`);
       await loadSweets();
     } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to create sweet");
+      toast.error(
+        err.response?.data?.error ||
+          "We couldn't create the delicacy at this time.",
+      );
     }
   };
 
@@ -42,10 +45,12 @@ export const AdminPanel = () => {
     try {
       await sweetService.update(id, input);
       setEditingSweet(null);
-      toast.success("Sweet updated successfully");
+      toast.success(`Details for ${input.name} have been updated.`);
       await loadSweets();
     } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to update sweet");
+      toast.error(
+        err.response?.data?.error || "We couldn't update the delicacy details.",
+      );
     }
   };
 
@@ -55,20 +60,24 @@ export const AdminPanel = () => {
     }
     try {
       await sweetService.delete(id);
-      toast.success("Sweet deleted successfully");
+      toast.success("The delicacy has been removed from the catalog.");
       await loadSweets();
     } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to delete sweet");
+      toast.error(
+        err.response?.data?.error || "We couldn't remove the delicacy.",
+      );
     }
   };
 
   const handleRestock = async (id, quantity) => {
     try {
       await sweetService.restock(id, quantity);
-      toast.success("Inventory restocked");
+      toast.success("Inventory has been successfully updated.");
       await loadSweets();
     } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to restock sweet");
+      toast.error(
+        err.response?.data?.error || "We couldn't update the inventory levels.",
+      );
     }
   };
 
