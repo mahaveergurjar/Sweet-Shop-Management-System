@@ -35,9 +35,6 @@
     background-attachment: fixed;
   }
 
-  .dark body {
-    @apply bg-[#0A120B] text-gray-100;
-  }
 }
 
 body {

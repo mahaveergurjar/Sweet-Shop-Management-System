@@ -25,7 +25,7 @@ export const AnalyticsDashboard = () => {
 
   if (loading)
     return (
-      <div className="animate-pulse flex space-x-4 h-64 bg-gray-100 dark:bg-gray-800 rounded-xl mb-8"></div>
+      <div className="animate-pulse flex space-x-4 h-64 bg-gray-100  rounded-xl mb-8"></div>
     );
   if (error)
     return (
@@ -96,20 +96,18 @@ export const AnalyticsDashboard = () => {
         ].map((item, idx) => (
           <div
             key={idx}
-            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700"
+            className="bg-white  p-6 rounded-xl shadow-lg border border-gray-100 "
           >
             <div className="text-2xl mb-2">{item.icon}</div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {item.label}
-            </p>
+            <p className="text-sm text-gray-500 ">{item.label}</p>
             <p className={`text-2xl font-bold ${item.color}`}>{item.value}</p>
           </div>
         ))}
       </div>
 
       {/* Sales Trend Chart */}
-      <div className="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-bold mb-6 text-gray-800 dark:text-gray-100">
+      <div className="lg:col-span-2 bg-white  p-6 rounded-xl shadow-lg border border-gray-100 ">
+        <h3 className="text-lg font-bold mb-6 text-gray-800 ">
           7-Day Sales Trend
         </h3>
         <div className="relative h-[200px] w-full pt-4">
@@ -170,18 +168,18 @@ export const AnalyticsDashboard = () => {
       </div>
 
       {/* Sales by Category */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-bold mb-6 text-gray-800 dark:text-gray-100">
+      <div className="bg-white  p-6 rounded-xl shadow-lg border border-gray-100 ">
+        <h3 className="text-lg font-bold mb-6 text-gray-800 ">
           Sales by Category
         </h3>
         <div className="space-y-4">
           {salesByCategory.map((cat, idx) => (
             <div key={idx}>
-              <div className="flex justify-between text-sm mb-1 text-gray-600 dark:text-gray-400">
+              <div className="flex justify-between text-sm mb-1 text-gray-600 ">
                 <span>{cat.name}</span>
                 <span className="font-bold">₹{cat.value}</span>
               </div>
-              <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+              <div className="w-full bg-gray-100  rounded-full h-2">
                 <div
                   className="bg-primary-500 h-2 rounded-full transition-all duration-1000"
                   style={{

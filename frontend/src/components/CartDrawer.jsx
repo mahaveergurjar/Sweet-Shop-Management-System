@@ -47,7 +47,7 @@ export const CartDrawer = ({ isOpen, onClose }) => {
       ></div>
 
       <div className="fixed inset-y-0 right-0 max-w-full flex">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300 border-l border-primary-100">
+        <div className="w-screen max-w-md bg-white shadow-[0_0_100px_rgba(0,0,0,0.1)] flex flex-col transform transition-transform duration-300 border-l border-amber-50 relative z-[60]">
           {/* Header */}
           <div className="px-8 py-8 border-b border-primary-50 flex justify-between items-center bg-white relative">
             {/* Decorative Header Pattern */}

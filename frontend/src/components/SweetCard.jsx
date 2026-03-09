@@ -16,7 +16,8 @@ export const SweetCard = ({ sweet }) => {
   };
 
   return (
-    <div className="group bg-white/70 backdrop-blur-sm rounded-[2.5rem] shadow-premium hover:shadow-premium-hover overflow-hidden transition-all duration-500 border border-white/50 transform hover:-translate-y-2">
+    <div className="group bg-white rounded-[2.5rem] shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-12px_rgba(255,193,7,0.2)] overflow-hidden transition-all duration-500 border border-amber-100/50 transform hover:-translate-y-2 relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
       {/* Image Area */}
       <div className="relative h-52 overflow-hidden bg-gray-50">
         {sweet.image_url ? (
@@ -61,6 +62,19 @@ export const SweetCard = ({ sweet }) => {
           <span className="text-xs font-bold text-gray-400 mt-2 ml-1">
             / {sweet.unit || "piece"}
           </span>
+        </div>
+
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-100">
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${sweet.quantity > 10 ? "bg-green-500" : sweet.quantity > 0 ? "bg-amber-500" : "bg-red-500"}`}
+            ></span>
+            <span className="text-[10px] font-black uppercase tracking-wider text-amber-700">
+              {isOutOfStock
+                ? "Out of Stock"
+                : `${sweet.quantity} ${sweet.unit || "piece"} Available`}
+            </span>
+          </div>
         </div>
 
         <button

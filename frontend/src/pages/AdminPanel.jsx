@@ -88,11 +88,11 @@ export const AdminPanel = () => {
                   <path d="M12 2L4 5v14l8 3 8-3V5l-8-3zm0 2.18L18.15 6.5 12 8.82 5.85 6.5 12 4.18zM6 8.58l5 1.88v9.36l-5-1.88V8.58zm7 11.24V10.46l5-1.88v9.36l-5 1.88z" />
                 </svg>
               </div>
-              <h1 className="text-5xl font-serif font-bold text-gray-900 dark:text-white">
+              <h1 className="text-5xl font-serif font-bold text-gray-900 ">
                 Royal <span className="text-primary-600">Inventory</span>
               </h1>
             </div>
-            <p className="text-gray-500 dark:text-gray-400 text-lg font-medium ml-1">
+            <p className="text-gray-500  text-lg font-medium ml-1">
               Curate and manage your collection of exquisite Indian delicacies.
             </p>
           </div>
@@ -128,7 +128,7 @@ export const AdminPanel = () => {
         {/* Modals */}
         {showForm && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-md animate-fadeIn">
-            <div className="w-full max-w-2xl bg-white dark:bg-[#0A120B] rounded-[2.5rem] shadow-premium p-1 border border-gray-100 dark:border-gray-800">
+            <div className="w-full max-w-2xl bg-white  rounded-[2.5rem] shadow-premium p-1 border border-gray-100 ">
               <div className="p-8">
                 <SweetForm
                   onSubmit={handleCreate}
@@ -156,37 +156,37 @@ export const AdminPanel = () => {
             </p>
           </div>
         ) : (
-          <div className="bg-white dark:bg-[#0A120C] rounded-[2.5rem] shadow-premium overflow-hidden border border-gray-100 dark:border-gray-800 transition-all duration-500">
+          <div className="bg-white  rounded-[2.5rem] shadow-premium overflow-hidden border border-gray-100  transition-all duration-500">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-100 dark:divide-gray-800">
-                <thead className="bg-gray-50/50 dark:bg-gray-900/30">
+              <table className="min-w-full divide-y divide-gray-100 ">
+                <thead className="bg-gray-50/50 ">
                   <tr>
-                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400  uppercase tracking-[0.2em]">
                       Delicacy
                     </th>
-                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400  uppercase tracking-[0.2em]">
                       Category
                     </th>
-                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400  uppercase tracking-[0.2em]">
                       Price (₹)
                     </th>
-                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400  uppercase tracking-[0.2em]">
                       Availability
                     </th>
-                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+                    <th className="px-8 py-5 text-left text-xs font-black text-gray-400  uppercase tracking-[0.2em]">
                       Management
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                <tbody className="divide-y divide-gray-100 ">
                   {sweets.map((sweet) => (
                     <tr
                       key={sweet.id}
-                      className="hover:bg-primary-50/30 dark:hover:bg-primary-900/5 transition-colors group"
+                      className="hover:bg-primary-50/30  transition-colors group"
                     >
                       <td className="px-8 py-6 whitespace-nowrap">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 overflow-hidden shadow-inner">
+                          <div className="w-10 h-10 rounded-xl bg-gray-100  overflow-hidden shadow-inner">
                             {sweet.image_url ? (
                               <img
                                 src={sweet.image_url}
@@ -205,18 +205,18 @@ export const AdminPanel = () => {
                               </div>
                             )}
                           </div>
-                          <span className="text-base font-bold text-gray-700 dark:text-gray-200 group-hover:text-primary-600 transition-colors">
+                          <span className="text-base font-bold text-gray-700  group-hover:text-primary-600 transition-colors">
                             {sweet.name}
                           </span>
                         </div>
                       </td>
                       <td className="px-8 py-6 whitespace-nowrap">
-                        <span className="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-[11px] font-black px-3 py-1.5 rounded-lg uppercase tracking-wider">
+                        <span className="bg-gray-100  text-gray-500  text-[11px] font-black px-3 py-1.5 rounded-lg uppercase tracking-wider">
                           {sweet.category}
                         </span>
                       </td>
                       <td className="px-8 py-6 whitespace-nowrap">
-                        <span className="text-lg font-serif font-black text-gray-900 dark:text-white">
+                        <span className="text-lg font-serif font-black text-gray-900 ">
                           {Number(sweet.price).toFixed(2)}
                         </span>
                       </td>
@@ -225,7 +225,7 @@ export const AdminPanel = () => {
                           <span
                             className={`w-1.5 h-1.5 rounded-full ${sweet.quantity > 10 ? "bg-green-500" : sweet.quantity > 0 ? "bg-amber-500" : "bg-red-500"}`}
                           ></span>
-                          <span className="text-sm font-bold text-gray-600 dark:text-gray-300">
+                          <span className="text-sm font-bold text-gray-600 ">
                             {sweet.quantity} {sweet.unit || "pcs"}
                           </span>
                         </div>
@@ -234,7 +234,7 @@ export const AdminPanel = () => {
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => setEditingSweet(sweet)}
-                            className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-xl hover:bg-primary-50 hover:text-primary-600 dark:hover:bg-primary-900/20 transition-all active:scale-95"
+                            className="p-2.5 bg-gray-100  text-gray-600  rounded-xl hover:bg-primary-50 hover:text-primary-600  transition-all active:scale-95"
                             title="Edit"
                           >
                             <svg
@@ -256,7 +256,7 @@ export const AdminPanel = () => {
                               const qty = prompt("Enter restock quantity:");
                               if (qty) handleRestock(sweet.id, parseInt(qty));
                             }}
-                            className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-xl hover:bg-green-50 hover:text-green-600 dark:hover:bg-green-900/20 transition-all active:scale-95"
+                            className="p-2.5 bg-gray-100  text-gray-600  rounded-xl hover:bg-green-50 hover:text-green-600  transition-all active:scale-95"
                             title="Restock"
                           >
                             <svg
@@ -275,7 +275,7 @@ export const AdminPanel = () => {
                           </button>
                           <button
                             onClick={() => handleDelete(sweet.id)}
-                            className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-xl hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 transition-all active:scale-95"
+                            className="p-2.5 bg-gray-100  text-gray-600  rounded-xl hover:bg-red-50 hover:text-red-600  transition-all active:scale-95"
                             title="Delete"
                           >
                             <svg

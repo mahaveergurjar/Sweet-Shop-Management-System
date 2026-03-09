@@ -14,20 +14,12 @@ import { Dashboard } from "./pages/Dashboard";
 import { AdminPanel } from "./pages/AdminPanel";
 import { PurchaseHistory } from "./pages/PurchaseHistory";
 import { useAuthStore } from "./store/authStore";
-import { useThemeStore } from "./store/themeStore";
-
 function App() {
   const { isAuthenticated, user } = useAuthStore();
-  const { theme } = useThemeStore();
-
-  useEffect(() => {
-    // Ensure theme is applied on mount
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
 
   return (
     <Router>
-      <div className="min-h-screen bg-white transition-colors duration-200">
+      <div className="min-h-screen bg-white">
         <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
         <Navbar />
         <Routes>

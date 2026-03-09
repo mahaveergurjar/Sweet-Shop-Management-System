@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { useCartStore } from "../store/cartStore";
-import { ThemeToggle } from "./ThemeToggle";
 import { CartDrawer } from "./CartDrawer";
 
 export const Navbar = () => {
@@ -78,8 +77,6 @@ export const Navbar = () => {
 
           {/* Actions Section */}
           <div className="flex items-center gap-4 sm:gap-6">
-            <ThemeToggle />
-
             {user ? (
               <div className="flex items-center gap-4">
                 {!isAdmin() && (
